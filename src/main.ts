@@ -5,7 +5,7 @@ import { AppModule } from './app.module';
 
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 
-global.crypto = require('crypto');
+// global.crypto = require('crypto');
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
