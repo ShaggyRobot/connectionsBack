@@ -1,0 +1,72 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum MessageType {
+  PERSONAL
+  GROUP
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  name         String
+  email        String @unique
+  passwordHash String
+  sessionId    String @default(uuid())
+
+  initiatedPersonalConversations PersonalConversation[] @relation("initiator")
+  receivedPersonalConversations  PersonalConversation[] @relation("recipient")
+  createdGroupConversations      GroupConversation[]
+  messages                       Message[]
+}
+
+model GroupConversation {
+  id        Int       @id @default(autoincrement())
+  title     String    @unique
+  createdBy Int
+  createdAt DateTime  @default(now())
+  messages  Message[]
+
+  user User @relation(fields: [createdBy], references: [id])
+}
+
+model PersonalConversation {
+  id          Int @id @default(autoincrement())
+  initiatorId Int
+  recipientId Int
+
+  messages Message[]
+
+  initiator User @relation("initiator", fields: [initiatorId], references: [id], onDelete: Cascade)
+  recipient User @relation("recipient", fields: [recipientId], references: [id], onDelete: Cascade)
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  authorId  Int
+  createdAt DateTime @default(now())
+
+  text String
+
+  groupConversationId    Int?
+  personalConversationId Int?
+
+  author User @relation(fields: [authorId], references: [id])
+
+  GroupConversation    GroupConversation?    @relation(fields: [groupConversationId], references: [id], onDelete: Cascade)
+  PersonalConversation PersonalConversation? @relation(fields: [personalConversationId], references: [id], onDelete: Cascade)
+
+  @@index([groupConversationId])
+  @@index([personalConversationId])
+}
