@@ -25,7 +25,13 @@ async function bootstrap() {
   //   credentials: true,
   // };
 
-  // app.enableCors(corsOpts);
+  const corsOpts: CorsOptions = {
+    origin: '*',
+    methods: 'GET, READ, PATCH, POST, PUT, DELETE',
+    credentials: true,
+  };
+
+  app.enableCors(corsOpts);
 
   await app.listen(3000);
 }
