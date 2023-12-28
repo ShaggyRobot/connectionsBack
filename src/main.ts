@@ -18,16 +18,9 @@ async function bootstrap() {
     }),
   );
 
-  //? for development
-  // const corsOpts: CorsOptions = {
-  //   origin: 'http://localhost:4200',
-  //   methods: 'GET, READ, PATCH, POST, PUT, DELETE',
-  //   credentials: true,
-  // };
-
   const corsOpts: CorsOptions = {
     origin: '*',
-    methods: 'GET, READ, PATCH, POST, PUT, DELETE',
+    methods: 'GET, POST, PUT, DELETE',
     credentials: true,
   };
 
