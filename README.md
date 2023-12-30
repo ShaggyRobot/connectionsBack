@@ -5,23 +5,6 @@
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
@@ -45,29 +28,55 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+## Deploy on Render:
+- Register on [render.com](https://render.com/).
+- Go to dashboard and create Postgres database:
+![2023-12-30 18_53_34-Window](https://github.com/ShaggyRobot/connectionsBack/assets/71377866/3dab422d-676b-404c-bce9-e77d6d3ec1a3)
+![image](https://github.com/ShaggyRobot/connectionsBack/assets/71377866/f5427524-ec5e-45d2-93ff-c2ecfeeb52ee)
 
-```bash
-# unit tests
-$ npm run test
 
-# e2e tests
-$ npm run test:e2e
+- When database is up and running, create new web service:
+![image](https://github.com/ShaggyRobot/connectionsBack/assets/71377866/ff95697d-6f78-4ff8-a388-06292526f70c)
+![image](https://github.com/ShaggyRobot/connectionsBack/assets/71377866/f411a859-c507-4bcc-bb69-7595f56f9f99)
 
-# test coverage
-$ npm run test:cov
+- Connect your repository to Render:
+![image](https://github.com/ShaggyRobot/connectionsBack/assets/71377866/5801bd36-37e1-4d89-af18-6275d385a320)
+![2023-12-30 19_07_39-Window](https://github.com/ShaggyRobot/connectionsBack/assets/71377866/a548c4cd-98f7-4e6b-8466-4bf041370eff)
+
+- Name your web service something:
+![image](https://github.com/ShaggyRobot/connectionsBack/assets/71377866/d157510a-a5fb-47ee-bdce-adca02ec828d)
+
+- Specify build and start commands:
+
+Build:
 ```
+npm install && npm run build && npx prisma migrate deploy
+```
+Start: 
+```
+npm run start:prod
+```
+![image](https://github.com/ShaggyRobot/connectionsBack/assets/71377866/afa1528f-5ea8-4600-8503-1bc9b501cdeb)
 
-## Support
+- Specify environment variables and click 'Create Web Service':
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+![image](https://github.com/ShaggyRobot/connectionsBack/assets/71377866/27bb148c-455c-4a82-b066-0ff132de0f63)
 
-## Stay in touch
+DATABASE_URL is internal url from database you created earlier:
+![image](https://github.com/ShaggyRobot/connectionsBack/assets/71377866/2e7eca46-3910-4d3c-93dd-82284f262169)
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- After successfull deploy, swap 'https://tasks.app.rs.school/angular/' in your angular project to your web service address:
 
-## License
+![image](https://github.com/ShaggyRobot/connectionsBack/assets/71377866/21c61ce9-3150-4e6f-b00d-fd084818c9d6)
 
-Nest is [MIT licensed](LICENSE).
+(*^o^)人 (^o^*)
+
+
+
+
+
+### P.S.
+If web service that is hosted on render is not used frequently enough, it goes asleep and wake-up times are really long.
+You can create a cron job on [cron-job.org](https://cron-job.org/), that will poke your backend every so often so it can stay awake:
+![2023-12-30 19_50_40-Window](https://github.com/ShaggyRobot/connectionsBack/assets/71377866/939e08ac-f6d3-4662-96e5-b4b4ec96355f)
+
